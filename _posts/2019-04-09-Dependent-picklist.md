@@ -1,53 +1,80 @@
-Picklist and Dependent Picklist in Salesforce LWC and AURA
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-RrJFVJiBuI4/XWzSp5lh9UI/AAAAAAAAAZA/XHecVbKiygkitkJ1LAjru0_FZn_eGKdZgCLcBGAs/s1600/Dependent-Picklist1-compressor.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img alt="Picklist and Dependent Picklist in Salesforce LWC and AURA" border="0" data-original-height="410" data-original-width="640" src="https://1.bp.blogspot.com/-RrJFVJiBuI4/XWzSp5lh9UI/AAAAAAAAAZA/XHecVbKiygkitkJ1LAjru0_FZn_eGKdZgCLcBGAs/s1600/Dependent-Picklist1-compressor.png" title="Picklist and Dependent Picklist in Salesforce LWC and AURA" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
 
 
-We will utilize base components that Salesforce has provided to build custom dynamic Picklist and Dependent Picklist.
+<div style="text-align: justify;">
+<span style="font-size: large;">We will utilize base components that Salesforce has provided to build custom dynamic Picklist and Dependent Picklist.</span></div>
 
-
-
-
-
-Base component that we will be using:
-
-<lightning-combobox
+<!--more-->
+<h2 style="text-align: left;">
+Base component that we will be using:</h2>
+<pre class="lang-markup" width="100%"><code>
+&lt;lightning-combobox
             name="progress"
             label="Status"
             value={value}
             placeholder="Select Progress"
             options={options}
-            onchange={handleChange}>
-</lightning-combobox>
+            onchange={handleChange}&gt;
+&lt;/lightning-combobox&gt;
+
+</code></pre>
+</div>
 
 
+</div>
+<div style="text-align: justify;">
+<div style="text-align: left;">
+<span style="font-size: large;">We will be using the above base component to build custom dynamic picklist and dependent picklist components, which can be re-used anywhere just by passing some parameters. We will see how we can use that custom component in Aura, which covers AURA inter-operability as well.</span></div>
+</div>
+<span style="font-size: large;"><span style="font-size: large;">
+</span> </span>
+<h2 style="text-align: left;">
+<span style="font-size: large;"> Main Logic for dependent picklist:</span></h2>
+<div style="text-align: justify;">
+<div style="text-align: left;">
+<span style="font-size: large;">We will reset the dependent picklist value on onchange handler of picklist, by firing pubsub events.</span></div>
+</div>
 
+<h2 style="text-align: left;">
+Before you even see the code experience LIVE component here:</h2>
 
+<!-- LIVE APP-->
+<div id="dPicklist">
+</div>
+<script src="https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc/lightning/lightning.out.js"></script>
 
-We will be using the above base component to build custom dynamic picklist and dependent picklist components, which can be re-used anywhere just by passing some parameters. We will see how we can use that custom component in Aura, which covers AURA inter-operability as well.
+<script>
+      
+    $Lightning.use("c:form", function() {
 
+    $Lightning.createComponent("c:tempPick",
+    { 
 
+  },
+   "dPicklist",
+    function(component) {
 
-Main Logic for dependent picklist:
-We will reset the dependent picklist value on onchange handler of picklist, by firing pubsub events.
-
-
-
-Before you even see the code experience LIVE component here:
-
-
-
-
-
-
-
-
-
-
-
-
-Picklist.html
-
-<template>
-    <lightning-combobox
+  console.log("LWC component was created");
+    });
+ },
+   'https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc',
+   'session-id');
+ </script>
+<!-- LIVE APP-->
+<h2 style="text-align: left;">
+Picklist.html</h2>
+<pre class="lang-markup" width="100%"><code>
+&lt;template&gt;
+    &lt;lightning-combobox
         id="pickList"
         name="progress"
         label={label}
@@ -55,15 +82,17 @@ Picklist.html
         variant={variant}
         placeholder="Select"
         options={options}
-        onchange={handleChange}>
-    </lightning-combobox>
-</template>
+        onchange={handleChange}&gt;
+    &lt;/lightning-combobox&gt;
+&lt;/template&gt;
+</code></pre>
+</div>
 
 
-
-
-Picklist.js
-
+<h2 style="text-align: left;">
+Picklist.js</h2>
+<div>
+<pre class="lang-javascript" width="100%"><code>
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
@@ -147,7 +176,7 @@ export default class Picklist2 extends LightningElement {
 
                 let tempOptions = [{ label: '--None--', value: "" }];
                 let temp2Options = this.record.picklistFieldValues[this.pickListfieldApiName].values;
-                temp2Options.forEach(opt => tempOptions.push(opt));
+                temp2Options.forEach(opt =&gt; tempOptions.push(opt));
 
                 this.options = tempOptions;
             }
@@ -155,7 +184,7 @@ export default class Picklist2 extends LightningElement {
             if(this.selectedValue === '' || this.selectedValue === undefined || this.selectedValue === null) {
                 this.value = { label: '--None--', value: "" }.value;
             } else {
-                this.value = this.options.find(listItem => listItem.value === this.selectedValue).value;
+                this.value = this.options.find(listItem =&gt; listItem.value === this.selectedValue).value;
             }
         } else if (error) {
             this.error = error;
@@ -188,60 +217,58 @@ export default class Picklist2 extends LightningElement {
     }
 
 }
+</code></pre>
+</div>
 
 
+<h2 style="text-align: left;">
+Picklist.js-meta.xml</h2>
+<pre class="lang-markup" width="100%"><code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="picklist2"&gt;
+    &lt;apiVersion&gt;46.0&lt;/apiVersion&gt;
+    &lt;isExposed&gt;true&lt;/isExposed&gt;
+    &lt;targets&gt;
+        &lt;target&gt;lightning__AppPage&lt;/target&gt;
+        &lt;target&gt;lightning__RecordPage&lt;/target&gt;
+        &lt;target&gt;lightning__HomePage&lt;/target&gt;
+    &lt;/targets&gt;   
+&lt;/LightningComponentBundle&gt;
+</code></pre>
 
 
-Picklist.js-meta.xml
+<span style="font-size: large;">Here we are using UI API to get record type id and picklist values based on that. UI API is helping us solve most of the problem, Otherwise previously should have to make an API call to get these results.</span>
+<span style="font-size: large;">This is one more credit we can give to LWC for making our lives easier.</span>
+<span style="font-size: large;">
+</span> <span style="font-size: large;">Above code is all about picklist what about dependent picklist ?? Hang on here comes it.</span>
+<span style="font-size: large;">
+</span> <span style="font-size: large;">I have tried all different means to remove parent child hierarchy between picklist and dependent picklist, there is no direct relation, but has a bit of relation that is because of events. Dependent picklist depends on the event fired by picklist. When onchange event occurs in picklist it fires a pubsub event to notify dependent picklist that its value has changed, there by depdendent picklist changes its value to none. I have tries all different approaches to remove this relation but the final outcome wasn't stable. That is the final outcome behaved differently in AURA and LWC, so had to to be content with this relation. Please leave your suggestions below to make this component even better. You can subscribe to the to my newsletter just by pressing on the '+' plus button to bottom right corner, it is also a lightning web component which is inturn integrated to mailchimp which is a e-mail service.</span>
+<span style="font-size: large;">
+</span> <span style="font-size: large;">Here comes dependent picklist code.</span>
 
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="picklist2">
-    <apiVersion>46.0</apiVersion>
-    <isExposed>true</isExposed>
-    <targets>
-        <target>lightning__AppPage</target>
-        <target>lightning__RecordPage</target>
-        <target>lightning__HomePage</target>
-    </targets>   
-</LightningComponentBundle>
-
-
-
-
-Here we are using UI API to get record type id and picklist values based on that. UI API is helping us solve most of the problem, Otherwise previously should have to make an API call to get these results.
-
-This is one more credit we can give to LWC for making our lives easier.
-
-
-Above code is all about picklist what about dependent picklist ?? Hang on here comes it.
-
-
-I have tried all different means to remove parent child hierarchy between picklist and dependent picklist, there is no direct relation, but has a bit of relation that is because of events. Dependent picklist depends on the event fired by picklist. When onchange event occurs in picklist it fires a pubsub event to notify dependent picklist that its value has changed, there by depdendent picklist changes its value to none. I have tries all different approaches to remove this relation but the final outcome wasn't stable. That is the final outcome behaved differently in AURA and LWC, so had to to be content with this relation. Please leave your suggestions below to make this component even better. You can subscribe to the to my newsletter just by pressing on the '+' plus button to bottom right corner, it is also a lightning web component which is inturn integrated to mailchimp which is a e-mail service.
-
-
-Here comes dependent picklist code.
-
-
-
-dependentPickList.html:
-
-<template>
-    <lightning-combobox id="dependentPickList"
+<h2 style="text-align: left;">
+dependentPickList.html:</h2>
+<div>
+<pre class="lang-markup" width="100%"><code>
+&lt;template&gt;
+    &lt;lightning-combobox id="dependentPickList"
                         name="Hello"
                         label={label}
                         value={value}
                         placeholder="--None--"
                         variant={variant}
                         options={options}
-                        onchange={handleChange}>
-    </lightning-combobox>
-</template>
+                        onchange={handleChange}&gt;
+    &lt;/lightning-combobox&gt;
+&lt;/template&gt;
+</code></pre>
+</div>
+</div>
 
 
-
-
-dependentPickList.js:
-
+<h2 style="text-align: left;">
+dependentPickList.js:</h2>
+<pre class="lang-javascript" width="100%"><code>
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
@@ -327,12 +354,12 @@ export default class DependentPickList4 extends NavigationMixin(LightningElement
                 this.options = [{ label: '--None--', value: "" }];
             } else {
                 this.selectedValue = '';
-                if (this.myMap !== null && this.myMap !== undefined) {
+                if (this.myMap !== null &amp;&amp; this.myMap !== undefined) {
 
                     let tempOptions = [{ label: '--None--', value: "" }];
                         console.log("valuesObj.selValue", valuesObj.selValue);
                         if(this.myMap.get(valuesObj.selValue)) {
-                            this.myMap.get(valuesObj.selValue).forEach(opt => tempOptions.push(opt));
+                            this.myMap.get(valuesObj.selValue).forEach(opt =&gt; tempOptions.push(opt));
                         }
 
                     this.options = tempOptions;
@@ -393,9 +420,9 @@ export default class DependentPickList4 extends NavigationMixin(LightningElement
 
                         const controllerValues = this.record.picklistFieldValues[this.pickListfieldApiName].controllerValues;
 
-                        Object.entries(controllerValues).forEach(([key, value]) =>  {
+                        Object.entries(controllerValues).forEach(([key, value]) =&gt;  {
                             const picValues = this.record.picklistFieldValues[this.pickListfieldApiName].values;
-                            picValues.forEach(pickValue => {
+                            picValues.forEach(pickValue =&gt; {
                                 if(pickValue.validFor.includes(value)) {
                                     if(pickMap.has(key)){
                                         let temp = pickMap.get(key);
@@ -473,12 +500,12 @@ export default class DependentPickList4 extends NavigationMixin(LightningElement
     initiateMap(thisMap) {
         this.myMap = thisMap;
 
-        if (thisMap !== null && thisMap !== undefined) {
+        if (thisMap !== null &amp;&amp; thisMap !== undefined) {
             let tempOptions = [{ label: '--None--', value: "" }];
-            if (this.controllingFieldValue !== null && this.controllingFieldValue !== undefined && this.controllingFieldValue !== '') {
+            if (this.controllingFieldValue !== null &amp;&amp; this.controllingFieldValue !== undefined &amp;&amp; this.controllingFieldValue !== '') {
                 console.log("this.controllingFieldValue", this.controllingFieldValue);
                 if(this.myMap.get(this.controllingFieldValue)) {
-                    this.myMap.get(this.controllingFieldValue).forEach(opt => tempOptions.push(opt));
+                    this.myMap.get(this.controllingFieldValue).forEach(opt =&gt; tempOptions.push(opt));
                 }
             }
             this.options = tempOptions;
@@ -488,53 +515,52 @@ export default class DependentPickList4 extends NavigationMixin(LightningElement
     
     
     reinitiatemap() {
-        if (this.myMap !== null && this.myMap !== undefined){
+        if (this.myMap !== null &amp;&amp; this.myMap !== undefined){
             this.initiateMap(this.myMap);
             console.log("this.myMap length", this.myMap.length);
         }
     }
 
 }
+</code></pre>
 
 
+<h2 style="text-align: left;">
+dependentPickList.js-meta.xml:</h2>
+<pre class="lang-markup" width="100%"><code>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="dependentPickList4"&gt;
+    &lt;apiVersion&gt;46.0&lt;/apiVersion&gt;
+    &lt;isExposed&gt;true&lt;/isExposed&gt;
+    &lt;targets&gt;
+        &lt;target&gt;lightning__AppPage&lt;/target&gt;
+        &lt;target&gt;lightning__RecordPage&lt;/target&gt;
+        &lt;target&gt;lightning__HomePage&lt;/target&gt;
+    &lt;/targets&gt;   
+&lt;/LightningComponentBundle&gt;
+</code></pre>
 
-
-dependentPickList.js-meta.xml:
-
-<?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="dependentPickList4">
-    <apiVersion>46.0</apiVersion>
-    <isExposed>true</isExposed>
-    <targets>
-        <target>lightning__AppPage</target>
-        <target>lightning__RecordPage</target>
-        <target>lightning__HomePage</target>
-    </targets>   
-</LightningComponentBundle>
-
-
-
-
-Usage:
+<span style="color: #45818e; font-size: large;">
+</span> 
+<h2 style="text-align: left;">
+Usage:</h2>
 Picklist:
-
-
-<c-picklist2
+<pre class="language-markup" width="100%"><code>
+&lt;c-picklist2
      unique-key={account.Id} 
      object-api-name="Account" 
      record-type-id="0127F000000kyxEQAQ" 
      selected-value={account.Master_Picklist__c}  
      pick-listfield-api-name="Master_Picklist__c"
-     onpicklistchange={handleMasterPicklistChange}>
-</c-picklist2>
-
-
+     onpicklistchange={handleMasterPicklistChange}&gt;
+&lt;/c-picklist2&gt;
+</code></pre>
+</div>
 
 
 Dependent picklist:
-
-
-<c-dependent-pick-list4
+<pre class="language-markup" width="100%"><code>
+&lt;c-dependent-pick-list4
       unique-key={account.Id}
       object-api-name="Account"
       record-type-id="0127F000000kyxEQAQ" 
@@ -542,26 +568,19 @@ Dependent picklist:
       controlling-field-value={account.Master_Picklist__c}
       controlling-field-api="Master_Picklist__c"
       selected-value={account.Controlling_Picklist__c}
-      onpicklistchange={handlePicklistChange}>
-</c-dependent-pick-list4>
+      onpicklistchange={handlePicklistChange}&gt;
+&lt;/c-dependent-pick-list4&gt;
+</code></pre>
 
 
+<span style="color: #45818e; font-size: large;">
+</span> <span style="color: #45818e; font-size: large;">Hey guys, If you find this post interesting and helpful don't forget to write your feedback down below in comments section. I am a social guy, you can find me in the apps mentioned below. Don't forget to share this with other Salesforce folks. Don't miss mentioning about Live components available in this site.</span>
 
+<h2 style="text-align: left;">
+Github Links:</h2>
 
+<span style="font-size: large;">Picklist:</span>
+<a href="https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/picklist2">https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/picklist2</a>
 
-Hey guys, If you find this post interesting and helpful don't forget to write your feedback down below in comments section. I am a social guy, you can find me in the apps mentioned below. Don't forget to share this with other Salesforce folks. Don't miss mentioning about Live components available in this site.
-
-
-
-Github Links:
-
-
-Picklist:
-
-https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/picklist2
-
-
-
-DependentPicklist:
-
-https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/dependentPickList4
+<span style="font-size: large;">DependentPicklist:</span>
+<a href="https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/dependentPickList4">https://github.com/kishoreBandanadam/lwc/tree/master/force-app/main/default/lwc/dependentPickList4</a></div>
