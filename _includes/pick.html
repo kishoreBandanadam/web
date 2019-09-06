@@ -1,0 +1,23 @@
+<!-- LIVE APP-->
+<div id="dPicklist">
+</div>
+<script src="https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc/lightning/lightning.out.js"></script>
+
+<script>
+      
+    $Lightning.use("c:form", function() {
+
+    $Lightning.createComponent("c:tempPick",
+    { 
+
+  },
+   "dPicklist",
+    function(component) {
+
+  console.log("LWC component was created");
+    });
+ },
+   'https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc',
+   'session-id');
+ </script>
+<!-- LIVE APP-->
