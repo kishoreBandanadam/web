@@ -47,6 +47,10 @@ Base component that we will be using:</h2>
 <h2 style="text-align: left;">
 Before you even see the code experience LIVE component here:</h2>
 
+<div class="">
+     {% include pick.html %}
+</div>
+    
 <!-- LIVE APP-->
 <div id="dPicklist">
 </div>
