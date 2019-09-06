@@ -51,29 +51,7 @@ Before you even see the code experience LIVE component here:</h2>
      {% include pick.html %}
 </div>
     
-<!-- LIVE APP-->
-<div id="dPicklist">
-</div>
-<script src="https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc/lightning/lightning.out.js"></script>
 
-<script>
-      
-    $Lightning.use("c:form", function() {
-
-    $Lightning.createComponent("c:tempPick",
-    { 
-
-  },
-   "dPicklist",
-    function(component) {
-
-  console.log("LWC component was created");
-    });
- },
-   'https://kishorelwc-developer-edition.ap5.force.com/salesforcelwc',
-   'session-id');
- </script>
-<!-- LIVE APP-->
 <h2 style="text-align: left;">
 Picklist.html</h2>
 <pre class="lang-markup" width="100%"><code>
