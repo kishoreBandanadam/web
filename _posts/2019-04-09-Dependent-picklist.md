@@ -74,7 +74,7 @@ Picklist.html</h2>
 <h2 style="text-align: left;">
 Picklist.js</h2>
 <div>
-<pre class="lang-javascript" width="100%"><code>
+{% highlight javascript %}
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
@@ -199,7 +199,7 @@ export default class Picklist2 extends LightningElement {
     }
 
 }
-</code></pre>
+{% endhighlight %}
 </div>
 
 
