@@ -4,7 +4,7 @@ title: "Affiliates Theme for Jekyll"
 description: "Jekyll Theme for Blogging"
 meta_description: "Jekyll theme for blogging."
 logo: 'assets/images/logo.png'
-favicon: 'assets/images/favicon.ico'
+favicon: 'assets/images/favicon.png'
 paginate: 12
 baseurl: '/'
 email: 'wowthemesnet@gmail.com'
