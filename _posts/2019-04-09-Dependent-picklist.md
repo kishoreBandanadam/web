@@ -30,6 +30,16 @@ Base component that we will be using:</h2>
 &lt;/lightning-combobox&gt;
 
 </code></pre>
+
+```javascript
+function sayHello(name) {
+  if (!name) {
+    console.log('Hello World');
+  } else {
+    console.log(`Hello ${name}`);
+  }
+}
+```
 </div>
 
 
