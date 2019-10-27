@@ -15,13 +15,7 @@
 <span style="font-size: large;">We will utilize base components that Salesforce has provided to build custom dynamic Picklist and Dependent Picklist.</span></div>
 
 
-```json
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
-```
+
 <!--more-->
 <h2 style="text-align: left;">
 Base component that we will be using:</h2>
@@ -83,7 +77,7 @@ Picklist.html</h2>
 <h2 style="text-align: left;">
 Picklist.js</h2>
 <div>
-{% highlight javascript %}
+{% highlight js %}
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
