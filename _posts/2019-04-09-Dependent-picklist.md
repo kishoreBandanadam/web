@@ -14,6 +14,14 @@
 <div style="text-align: justify;">
 <span style="font-size: large;">We will utilize base components that Salesforce has provided to build custom dynamic Picklist and Dependent Picklist.</span></div>
 
+
+```json
+{
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
 <!--more-->
 <h2 style="text-align: left;">
 Base component that we will be using:</h2>
