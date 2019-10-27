@@ -1,3 +1,4 @@
+<link rel="shortcut icon" type="image/ico" href="assets/images/favicon.ico">
 <div dir="ltr" style="text-align: left;" trbidi="on">
 <div dir="ltr" style="text-align: left;" trbidi="on">
 <div dir="ltr" style="text-align: left;" trbidi="on">
