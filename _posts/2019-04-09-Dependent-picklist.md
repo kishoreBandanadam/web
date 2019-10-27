@@ -31,15 +31,7 @@ Base component that we will be using:</h2>
 
 </code></pre>
 
-```javascript
-function sayHello(name) {
-  if (!name) {
-    console.log('Hello World');
-  } else {
-    console.log(`Hello ${name}`);
-  }
-}
-```
+
 </div>
 
 
@@ -87,7 +79,7 @@ Picklist.html</h2>
 <h2 style="text-align: left;">
 Picklist.js</h2>
 <div>
-{% highlight js %}
+{% highlight javascript %}
 /* eslint-disable no-console */
 import { LightningElement, track, wire, api } from 'lwc';
 import { getPicklistValuesByRecordType } from 'lightning/uiObjectInfoApi';
